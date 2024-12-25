@@ -55,7 +55,7 @@ do
     double step = 0.0;
     do
     {
-        step = validate_floating_value(RESET_COLOR "Enter the step "LIGHT_GREEN "df (Hz) " RESET_COLOR"(Hz) [the value can't be negative]:\n", condition_negative);
+        step = validate_floating_value(RESET_COLOR "Enter the step "LIGHT_GREEN "df (Hz) " RESET_COLOR"[the value can't be negative]:\n", condition_negative);
         if (step > fmax - fmin)
         {
             printf(LIGHT_RED "Step (df) should be lesser than the difference between minimum and maximum frequencies\n" RESET_COLOR);
@@ -66,23 +66,24 @@ do
 
     double res_freq = 0.0;
     res_freq = 1.0 / (2.0 * M_PI * sqrt(L * C));
-    printf("The " LIGHT_GREEN "resonance frequency is %lf Hz\n" RESET_COLOR, res_freq);
+    printf("The resonance frequency is " LIGHT_GREEN "%lf Hz\n" RESET_COLOR, res_freq);
 
     double f = fmin;
     int i = 0;
+    printf(LIGHT_YELLOW "|  F R E Q U E N C Y  | " LIGHT_GREEN "C O M P L E X  R E S I S T A N C E \n" RESET_COLOR);
     do
     {
         const double omega = calculate_angular_frequency(f);
-
         const complex z = calculate_complex_resistance(user_choice, R, R1, R2, L, C, omega);
-        printf("f%d = %lf\n", i + 1, f);
-        printf("z%d = ", i + 1);
+
+        printf(LIGHT_YELLOW "|f%d  =   %-10.6lf   | " LIGHT_GREEN "z%d =  ", i + 1, f, i + 1);
         print_complex(z);
+
         i++;
         f += step;
     }
     while (f <= fmax);
-    printf("\nTo continue press " LIGHT_GREEN "ENTER, " RESET_COLOR "to exit press " LIGHT_RED "any other key\n" RESET_COLOR);
+    printf(RESET_COLOR "\nTo continue press " LIGHT_GREEN "ENTER, " RESET_COLOR "to exit press " LIGHT_RED "any other key\n" RESET_COLOR);
 }
     while (getch() == ENTER);
     return 0;
