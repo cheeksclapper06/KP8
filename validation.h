@@ -42,11 +42,9 @@ char validate_input_getch(const unsigned start_option, const unsigned end_option
         if (input < start_option || input > end_option)
         {
             printf(LIGHT_RED "Please enter a number in given range\n" RESET_COLOR);
-            fflush(stdin);
         }
         else
         {
-            fflush(stdin);
             return input;
         }
     }
