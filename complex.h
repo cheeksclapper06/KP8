@@ -9,13 +9,16 @@ typedef struct
     double imaginary;
 } complex;
 
-double complex_division(const complex *first, const complex *second)
+complex complex_division(complex first, complex second)
 {
-    return (first->real * second->real + first->imaginary * second->imaginary) / (second->real * second->real + second->imaginary * second->imaginary);
+    complex result = {0.0, 0.0};
+    result.real = (first.real * second.real + first.imaginary * second.imaginary) / (second.real * second.real + second.imaginary * second.imaginary);
+    result.imaginary = (second.real * first.imaginary - first.real * second.imaginary) / (second.real * second.real + second.imaginary * second.imaginary);
+    return result;
 }
 
-void print_complex(const complex *complex_number)
+void print_complex(complex complex_number)
 {
-    printf("%e + %ei", complex_number->real, complex_number->imaginary);
+    printf("%e + i * %lf\n", complex_number.real, complex_number.imaginary);
 }
 #endif //COMPLEX_H

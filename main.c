@@ -4,7 +4,7 @@
 #include "hexnum.h"
 #include "circuit.h"
 #include "complex.h"
-
+#include "calculation.h"
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
@@ -18,17 +18,19 @@ do
     double L = 0.0, C = 0.0;
     L = validate_floating_value(RESET_COLOR "Enter the inductance " LIGHT_GREEN "L (mHn) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
     C = validate_floating_value(RESET_COLOR "Enter the capacitance " LIGHT_GREEN "C (mcF) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
+
+    double R = 0.0;
+    double R1 = 0.0, R2 = 0.0;
+
     switch(user_choice)
     {
         case RLC:
         case RCL:
-            double R = 0.0;
         R = validate_floating_value(RESET_COLOR "Enter the resistance " LIGHT_GREEN "R (Ohm) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
         break;
 
         case R2CLR1:
         case R1CR2L:
-        double R1 = 0.0, R2 = 0.0;
         R1 = validate_floating_value(RESET_COLOR "Enter the resistance " LIGHT_GREEN "R1 (Ohm) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
         R2 = validate_floating_value(RESET_COLOR "Enter the resistance " LIGHT_GREEN "R2 (Ohm) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
         break;
@@ -62,7 +64,24 @@ do
     }
     while (step > fmax - fmin);
 
+    double res_freq = 0.0;
+    res_freq = 1.0 / (2.0 * M_PI * sqrt(L * C));
+    printf("The " LIGHT_GREEN "resonance frequency is %lf Hz\n" RESET_COLOR, res_freq);
 
+    double f = fmin;
+    int i = 0;
+    do
+    {
+        const double omega = calculate_angular_frequency(f);
+
+        const complex z = calculate_complex_resistance(user_choice, R, R1, R2, L, C, omega);
+        printf("f%d = %lf\n", i + 1, f);
+        printf("z%d = ", i + 1);
+        print_complex(z);
+        i++;
+        f += step;
+    }
+    while (f <= fmax);
     printf("\nTo continue press " LIGHT_GREEN "ENTER, " RESET_COLOR "to exit press " LIGHT_RED "any other key\n" RESET_COLOR);
 }
     while (getch() == ENTER);

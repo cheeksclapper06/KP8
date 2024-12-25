@@ -36,9 +36,10 @@ double validate_floating_value(const char *message, bool (*condition)(double))
 }
 char validate_input_getch(const unsigned start_option, const unsigned end_option)
 {
-    char input = getch();
+    char input = 0;
     do
     {
+        input = getch();
         if (input < start_option || input > end_option)
         {
             printf(LIGHT_RED "Please enter a number in given range\n" RESET_COLOR);
@@ -49,7 +50,6 @@ char validate_input_getch(const unsigned start_option, const unsigned end_option
             fflush(stdin);
             return input;
         }
-        input = getch();
     }
     while (input < start_option || input > end_option);
 }
