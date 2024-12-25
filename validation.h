@@ -3,13 +3,12 @@
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <math.h>
 #include <conio.h>
 #include "color.h"
 
-bool condition_negative(const double value)
+bool condition_restriction(const double value)
 {
-    return value <= 0.0;
+    return value < MIN || value > MAX;
 }
 
 double validate_floating_value(const char *message, bool (*condition)(double))

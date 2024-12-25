@@ -2,7 +2,6 @@
 #define CIRCUIT_H
 
 #include <stdio.h>
-#include <conio.h>
 #include "color.h"
 #include "hexnum.h"
 #include "validation.h"

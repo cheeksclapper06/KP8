@@ -5,6 +5,7 @@
 #include "circuit.h"
 #include "complex.h"
 #include "calculation.h"
+
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
@@ -16,8 +17,8 @@ do
     user_choice = select_circuit_type(user_choice);
 
     double L = 0.0, C = 0.0;
-    L = validate_floating_value(RESET_COLOR "Enter the inductance " LIGHT_GREEN "L (mHn) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
-    C = validate_floating_value(RESET_COLOR "Enter the capacitance " LIGHT_GREEN "C (mcF) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
+    L = validate_floating_value(RESET_COLOR "Enter the inductance " LIGHT_GREEN "L (mHn) " RESET_COLOR "[the value can't be negative]:\n", condition_restriction);
+    C = validate_floating_value(RESET_COLOR "Enter the capacitance " LIGHT_GREEN "C (mcF) " RESET_COLOR "[the value can't be negative]:\n", condition_restriction);
 
     double R = 0.0;
     double R1 = 0.0, R2 = 0.0;
@@ -26,13 +27,13 @@ do
     {
         case RLC:
         case RCL:
-        R = validate_floating_value(RESET_COLOR "Enter the resistance " LIGHT_GREEN "R (Ohm) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
+        R = validate_floating_value(RESET_COLOR "Enter the resistance " LIGHT_GREEN "R (Ohm) " RESET_COLOR "[the value can't be negative]:\n", condition_restriction);
         break;
 
         case R2CLR1:
         case R1CR2L:
-        R1 = validate_floating_value(RESET_COLOR "Enter the resistance " LIGHT_GREEN "R1 (Ohm) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
-        R2 = validate_floating_value(RESET_COLOR "Enter the resistance " LIGHT_GREEN "R2 (Ohm) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
+        R1 = validate_floating_value(RESET_COLOR "Enter the resistance " LIGHT_GREEN "R1 (Ohm) " RESET_COLOR "[the value can't be negative]:\n", condition_restriction);
+        R2 = validate_floating_value(RESET_COLOR "Enter the resistance " LIGHT_GREEN "R2 (Ohm) " RESET_COLOR "[the value can't be negative]:\n", condition_restriction);
         break;
 
         default:
@@ -42,8 +43,8 @@ do
     double fmin = 0.0, fmax = 0.0;
     do
     {
-        fmin = validate_floating_value(RESET_COLOR "Enter the minimum frequency " LIGHT_GREEN "fmin (Hz) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
-        fmax = validate_floating_value(RESET_COLOR "Enter the maximum frequency " LIGHT_GREEN "fmax (Hz) " RESET_COLOR "[the value can't be negative]:\n", condition_negative);
+        fmin = validate_floating_value(RESET_COLOR "Enter the minimum frequency " LIGHT_GREEN "fmin (Hz) " RESET_COLOR "[the value can't be negative]:\n", condition_restriction);
+        fmax = validate_floating_value(RESET_COLOR "Enter the maximum frequency " LIGHT_GREEN "fmax (Hz) " RESET_COLOR "[the value can't be negative]:\n", condition_restriction);
         if (fmin > fmax)
         {
             printf(LIGHT_RED "fmin should be lesser than fmax\n" RESET_COLOR);
@@ -55,7 +56,7 @@ do
     double step = 0.0;
     do
     {
-        step = validate_floating_value(RESET_COLOR "Enter the step "LIGHT_GREEN "df (Hz) " RESET_COLOR"[the value can't be negative]:\n", condition_negative);
+        step = validate_floating_value(RESET_COLOR "Enter the step "LIGHT_GREEN "df (Hz) " RESET_COLOR"[the value can't be negative]:\n", condition_restriction);
         if (step > fmax - fmin)
         {
             printf(LIGHT_RED "Step (df) should be lesser than the difference between minimum and maximum frequencies\n" RESET_COLOR);
