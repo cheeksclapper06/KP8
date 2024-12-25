@@ -7,8 +7,6 @@
 #include "hexnum.h"
 #include "validation.h"
 
-//подкорректировать размерность графов опору
-
 void RLC_circuit()
 {
     printf("RLC circuit \n"
@@ -22,31 +20,31 @@ void RLC_circuit()
 void RCL_circuit()
 {
     printf("RCL circuit\n "
-                  "●─┬────────▆▆▆──────││──────┬─●\n"
-                  "   │         R       C       │\n"
-                  "   │                         │\n"
-                  "   │      L                  │\n"
-                  "   └────◠◠◠◠─────────────────┘\n");
+                  "●─┬─▆▆▆──────││───┬─●\n"
+                  "   │  R        C   │\n"
+                  "   │               │\n"
+                  "   │      L        │\n"
+                  "   └────◠◠◠◠───────┘\n");
 }
 
 void R2CLR1_circuit()
 {
     printf("R2CLR1 circuit:\n "
-                   "●─┬─────────▆▆▆──────││─────┓\n"
-                   "   │         R2         C    │\n"
-                   "   │                         │\n"
-                   "   █ R1     L                │\n"
-                   " ●─┴──────◠◠◠◠───────────────┘\n");
+                   "●─┬─▆▆▆──────││─────┓\n"
+                   "   │ R2        C     │\n"
+                   "   │                 │\n"
+                   "   █ R1     L        │\n"
+                   " ●─┴──────◠◠◠◠───────┘\n");
 }
 
 void R1CR2L_circuit()
 {
     printf("R1CR2L circuit \n"
-                   "●─┬────────▆▆▆──────────────┓\n"
-                   "  █ R1     R2               │\n"
-                   "  ┴                         │\n"
-                   "  ┬ C       L               │\n"
-                   "●─┴───────◠◠◠◠──────────────┚\n");
+                   "●─┬────────▆▆▆───────┓\n"
+                   "  █ R1     R2        │\n"
+                   "  ┴                  │\n"
+                   "  ┬ C       L        │\n"
+                   "●─┴───────◠◠◠◠───────┚\n");
 }
 
 char select_circuit_type(char circuit_choice)

@@ -19,6 +19,6 @@ complex complex_division(const complex first, const complex second)
 
 void print_complex(const complex complex_number)
 {
-    printf("%e + i * %lf\n", complex_number.real, complex_number.imaginary);
+    printf("%e + i * %e\n", complex_number.real, complex_number.imaginary);
 }
 #endif //COMPLEX_H
